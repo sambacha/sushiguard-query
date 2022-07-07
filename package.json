@@ -1,0 +1,38 @@
+{
+  "name": "sushi-router-query",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bindings for SushiGuard",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "ttsc"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "@ethersproject/contracts": "^5.5.0",
+    "@types/lodash.isequal": "^4.5.5",
+    "@types/lodash.isplainobject": "^4.0.6",
+    "@types/lodash.zip": "^4.2.6",
+    "@types/node": "^16",
+    "@types/react": "^17.0.38",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "ethers": "^5.6.9",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.zip": "^4.2.0",
+    "prettier": "^2.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.34.5",
+    "rollup": "^2.75.7",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "ts-node": "^10.4.0",
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {}
+}

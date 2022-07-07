@@ -1,0 +1,1 @@
+export { isOverridesObject } from './isOverridesObject';
