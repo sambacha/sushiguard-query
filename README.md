@@ -1,5 +1,9 @@
 #  rq-sushi
 
+> Based off of Uniswap Redux Multicall 
+
+[see https://github.com/sushiswap/sushiswap/blob/master/apps/swap/lib/state/multicall.ts](https://github.com/sushiswap/sushiswap/blob/master/apps/swap/lib/state/multicall.ts)
+
 ## Example: calling the same method on a list of contracts.
 
 Basic:
