@@ -39,7 +39,9 @@ export interface TransactionFailedError {
   stack: string;
 }
 
+// TODO: Fix this ErrorType
 export function isTransactionFailedError(error: TransactionError): error is TransactionError {
+  // 'Server error: Invalid input, unable to locate canonical block',
   if (error?.message?.includes('-32000')) {
     return true;
   }

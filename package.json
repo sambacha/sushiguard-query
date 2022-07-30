@@ -1,38 +1,61 @@
 {
-  "name": "sushi-router-query",
-  "version": "0.1.0",
+  "name": "sushiswap-router-query",
+  "version": "0.1.1",
   "private": true,
   "description": "Bindings for SushiGuard",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "ttsc"
+    "compile": "npx rollup -c sdk.rollup.js",
+    "clean": "rm -rf dist",
+    "build:pre": "npm run clean",
+    "build:types": "npx tsc",
+    "build:source": "npx rollup --config rollup.config.js",
+    "build:browser": "npm run build:pre; npm run build:source; npm run build:types"
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "@ethersproject/contracts": "^5.5.0",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@types/lodash.isequal": "^4.5.5",
     "@types/lodash.isplainobject": "^4.0.6",
     "@types/lodash.zip": "^4.2.6",
     "@types/node": "^16",
     "@types/react": "^17.0.38",
     "@zerollup/ts-transform-paths": "^1.7.18",
+    "downlevel-dts": "^0.10.0",
+    "esbuild": "^0.14.51",
     "ethers": "^5.6.9",
     "lodash.isequal": "^4.5.0",
     "lodash.isplainobject": "^4.0.6",
     "lodash.zip": "^4.2.0",
     "prettier": "^2.7.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-query": "^3.34.5",
-    "rollup": "^2.75.7",
+    "rollup": "^2.77.2",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-esbuild": "^4.9.1",
+    "rollup-plugin-polyfill-node": "^0.10.2",
     "rollup-plugin-typescript2": "^0.32.1",
     "ts-node": "^10.4.0",
+    "tsup": "^6.2.1",
+    "tsutils": "^3.21.0",
     "ttypescript": "^1.5.13",
-    "typescript": "^4.3.5"
+    "typescript": "^4.7.4",
+    "typescript-transform-paths": "^3.3.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@ethersproject/abstract-signer": "^5.6.2",
+    "@ethersproject/bignumber": "^5.6.2",
+    "@ethersproject/contracts": "^5.6.2",
+    "@ethersproject/logger": "^5.6.0",
+    "react-query": "^3.34.5"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2 || ^18.x",
+    "react-dom": "^17.0.2 || ^18.x"
+  }
 }

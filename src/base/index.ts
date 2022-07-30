@@ -1,9 +1,11 @@
 export {
+  isTransactionFailedError,
+  isTransactionReplacedError
+} from './TransactionError';
+export type {
   TransactionError,
   TransactionFailedError,
-  TransactionReplacedError,
-  isTransactionFailedError,
-  isTransactionReplacedError,
+  TransactionReplacedError
 } from './TransactionError';
 export { TransactionStatus } from './TransactionStatus';
-export { Unpacked } from './Unpacked';
+export type { Unpacked } from './Unpacked';
