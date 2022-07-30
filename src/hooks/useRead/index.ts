@@ -20,7 +20,18 @@ export interface UseReadCallOptions<
 }
 
 const AUTH_PAL_FN = (v: unknown) => v;
-
+/**
+ * @description Make a contract read and query results
+ * @export useReadCall
+ * @template TContract
+ * @template TMethodName
+ * @template TContractData
+ * @template TData
+ * @param {(TContract | undefined)} contract
+ * @param {TMethodName} methodName
+ * @param {UseReadCallOptions<TContract, TMethodName, TContractData, TData>} [options]
+ * @returns {*}  {QueryObserverResult<TData>}
+ */
 export function useReadCall<
   TContract extends Contract,
   TMethodName extends ContractMethodName<TContract>,
@@ -88,7 +99,23 @@ export function makeReadCallUseQueryOptions<
 
   return queryOptions;
 }
-
+/**
+ * @description Make Read Call Query by Key
+ * @export makeReadCallQueryKey
+ * @template TContract
+ * @template TMethodName
+ * @param {(string | undefined)} contractAddress
+ * @param {TMethodName} methodName
+ * @param {(Parameters<TContract['functions'][TMethodName]> | undefined)} callArgs
+ * @returns {*}  {([
+ *   string,
+ *   TMethodName,
+ *   string | undefined,
+ *   {
+ *     callArgs: Parameters<TContract['functions'][TMethodName]> | undefined;
+ *   },
+ * ])}
+ */
 export function makeReadCallQueryKey<
   TContract extends Contract,
   TMethodName extends ContractMethodName<TContract>,

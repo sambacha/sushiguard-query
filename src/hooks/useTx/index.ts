@@ -1,4 +1,4 @@
-import { AbstractSigner as Signer } from '@ethersproject/providers';
+import { Signer } from '@ethersproject/abstract-signer';
 import { BigNumber } from '@ethersproject/bignumber';
 import {
   ContractReceipt,
@@ -71,13 +71,13 @@ export function useTransaction<
       args: ContractMethodArgs<TContract, TMethodName>,
     ): Promise<ContractReceipt> => {
       if (!signer) {
-        console.warn(`Tried to call ${methodName} without a signer.`);
+        console.warn(`Tried to call ${String(methodName)} without a signer.`);
         return undefined as unknown as ContractReceipt;
       }
 
       if (!contract) {
-        // only for typesafety, this should never happen
-        console.warn(`Tried to call ${methodName} without contract instance.`);
+       // sanity check
+        console.warn(`Tried to call ${String(methodName)}  without contract instance.`);
         return undefined as unknown as ContractReceipt;
       }
 
@@ -85,8 +85,8 @@ export function useTransaction<
 
       let finalCallArgs: ContractMethodArgs<TContract, TMethodName> = args;
 
-      // Sets the gasLimit by either updating the existing overrides object,
-      // or adding one if it doesn't exist.
+
+      // Sets the gasLimit by either updating the existing overrides object, or adding one if it doesn't exist.
       if (setGasLimit) {
         const gasEstimate = await fetchGasEstimate<TContract, TMethodName>(
           connected,
@@ -140,8 +140,7 @@ export function useTransaction<
       }
 
       console.error(
-        // @ts-expect-error
-        `Error calling ${methodName} on: ${contract?.address} with arguments:`,
+        `Error calling ${String(methodName)} on: ${contract?.address} with arguments:`,
         variables,
         error,
       );

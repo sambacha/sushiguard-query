@@ -1,4 +1,16 @@
+# -*- mode: gitignore; -*-
+/out
+cache/
+artifacts/
+.\#*
+*~
+\#*\#
+/**/build
 .DS_Store
-*node_modules*
-compiled
-dist
+node_modules
+tmp/
+_dev/
+coverage/
+*.tar.gz
+*.tgz
+.env

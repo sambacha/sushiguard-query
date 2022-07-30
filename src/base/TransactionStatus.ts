@@ -1,12 +1,17 @@
 /**
- *
- *
- * @export
- * @enum {number}
+ * TODO
  */
+
 export enum TransactionStatus {
-  SUBMITTED = 'submitted',
-  REPRICED = 'repriced',
-  CANCELLED = 'cancelled',
-  MINED = 'mined',
+  SUBMITTED = 'SUBMITTED',
+  REPRICED = 'REPRICED',
+  CANCELLED = 'CANCELLED',
+  MINED = 'MINED',
+  UNCHECKED = 'UNCHECKED',
+  PROCESSING = 'PROCESSING',
+  OK = 'OK',
+  INDETERMINATE = 'INDETERMINATE',
+  ERROR = 'ERROR',
+  INVALID_PARAMS = 'INVALID_PARAMS',
+  INVALID_REQUEST = 'INVALID_REQUEST'
 }
