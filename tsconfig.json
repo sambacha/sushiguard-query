@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "jsx": "react",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -26,15 +29,13 @@
       ],
     },
     "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true },
       {
+        "transform": "@ovos-media/ts-transform-paths",
         "exclude": [
           "*"
-        ],
-        "transform": "@zerollup/ts-transform-paths"
+        ]
       }
-    ]
+    ],
   },
   "include": [
     "src/**/*.ts"
