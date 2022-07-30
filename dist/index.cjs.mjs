@@ -1,52 +1,88 @@
 import { Logger } from '@ethersproject/logger';
 import isPlainObject from 'lodash.isplainobject';
 import isEqual from 'lodash.isequal';
-import { makeReadCallQueryKey } from 'src/hooks/useRead';
+import 'react-query';
 
 function isTransactionReplacedError(error) {
-  if (error.code === Logger.errors.TRANSACTION_REPLACED) {
-    return true;
-  }
-  return false;
+    if (error.code === Logger.errors.TRANSACTION_REPLACED) {
+        return true;
+    }
+    return false;
 }
+// TODO: Fix this ErrorType
 function isTransactionFailedError(error) {
-  if (error?.message?.includes("-32000")) {
-    return true;
-  }
-  return false;
+    // 'Server error: Invalid input, unable to locate canonical block',
+    if (error?.message?.includes('-32000')) {
+        return true;
+    }
+    return false;
 }
 
-var TransactionStatus = /* @__PURE__ */ ((TransactionStatus2) => {
-  TransactionStatus2["SUBMITTED"] = "SUBMITTED";
-  TransactionStatus2["REPRICED"] = "REPRICED";
-  TransactionStatus2["CANCELLED"] = "CANCELLED";
-  TransactionStatus2["MINED"] = "MINED";
-  TransactionStatus2["UNCHECKED"] = "UNCHECKED";
-  TransactionStatus2["PROCESSING"] = "PROCESSING";
-  TransactionStatus2["OK"] = "OK";
-  TransactionStatus2["INDETERMINATE"] = "INDETERMINATE";
-  TransactionStatus2["ERROR"] = "ERROR";
-  TransactionStatus2["INVALID_PARAMS"] = "INVALID_PARAMS";
-  TransactionStatus2["INVALID_REQUEST"] = "INVALID_REQUEST";
-  return TransactionStatus2;
-})(TransactionStatus || {});
+/**
+ * TODO
+ */
+var TransactionStatus;
+(function (TransactionStatus) {
+    TransactionStatus["SUBMITTED"] = "SUBMITTED";
+    TransactionStatus["REPRICED"] = "REPRICED";
+    TransactionStatus["CANCELLED"] = "CANCELLED";
+    TransactionStatus["MINED"] = "MINED";
+    TransactionStatus["UNCHECKED"] = "UNCHECKED";
+    TransactionStatus["PROCESSING"] = "PROCESSING";
+    TransactionStatus["OK"] = "OK";
+    TransactionStatus["INDETERMINATE"] = "INDETERMINATE";
+    TransactionStatus["ERROR"] = "ERROR";
+    TransactionStatus["INVALID_PARAMS"] = "INVALID_PARAMS";
+    TransactionStatus["INVALID_REQUEST"] = "INVALID_REQUEST";
+})(TransactionStatus || (TransactionStatus = {}));
 
 function isOverridesObject(obj) {
-  if (isPlainObject(obj)) {
-    const overrides = obj;
-    if ("gasPrice" in overrides || "gasLimit" in overrides || "value" in overrides || "nonce" in overrides) {
-      return true;
+    if (isPlainObject(obj)) {
+        const overrides = obj;
+        if ('gasPrice' in overrides ||
+            'gasLimit' in overrides ||
+            'value' in overrides ||
+            'nonce' in overrides) {
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
 
-function matchReadCallQuery(_events, _getEventFilter, query, contractAddress, methodName, callArgs) {
-  const match = isEqual(
-    query.queryKey,
-    makeReadCallQueryKey(contractAddress, methodName, callArgs)
-  );
-  return match;
+/**
+ * @description Make Read Call Query by Key
+ * @export makeReadCallQueryKey
+ * @template TContract
+ * @template TMethodName
+ * @param {(string | undefined)} contractAddress
+ * @param {TMethodName} methodName
+ * @param {(Parameters<TContract['functions'][TMethodName]> | undefined)} callArgs
+ * @returns {*}  {([
+ *   string,
+ *   TMethodName,
+ *   string | undefined,
+ *   {
+ *     callArgs: Parameters<TContract['functions'][TMethodName]> | undefined;
+ *   },
+ * ])}
+ */
+function makeReadCallQueryKey(contractAddress, methodName, callArgs) {
+    return ['contractCall', methodName, contractAddress, { callArgs }];
+}
+
+/**
+ * @export matchReadCallQuery
+ * @summary Utility for matching smart contract read call queries when busting the cache.
+ */
+function matchReadCallQuery(
+//  estimate: any,
+// addressPromise: any,
+_events, _getEventFilter, 
+//   addListener: any,
+query, contractAddress, methodName, callArgs) {
+    // @note Don't Inline
+    const match = isEqual(query.queryKey, makeReadCallQueryKey(contractAddress, methodName, callArgs));
+    return match;
 }
 
 export { TransactionStatus, isOverridesObject, isTransactionFailedError, isTransactionReplacedError, matchReadCallQuery };
