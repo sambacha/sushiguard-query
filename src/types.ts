@@ -34,6 +34,7 @@ export type ContractFilterCall<
 
 export type ContractQueryFilterCall<TContract extends Contract> = TContract['queryFilter'];
 /**
+ * @type ContractFunctionCall
  * Gets a type for the specific contract call
  */
 export type ContractFunctionCall<
@@ -44,7 +45,9 @@ export type ContractFunctionCall<
 export type EstimateGasMethodName<TContract extends Contract> = keyof TContract['estimateGas'];
 
 /**
- * Gets a type for the methods available on a given contract
+ * 
+ * @type ContractMethodName
+ * @summary Gets a type for the methods available on a given contract
  */
 export type ContractMethodName<TContract extends Contract> = keyof TContract['functions'];
 
@@ -58,13 +61,17 @@ export type EstimateGasMethodArgs<
 export type ContractFilterName<TContract extends Contract> = keyof TContract['filters'];
 
 /**
- * Gets a type for the return type of the given contract call
+ * @type ContractReturnType
+ * @summary Gets a type for the return type of the given contract call
  */
 export type ContractReturnType<
   TContract extends Contract,
   TMethodName extends ContractMethodName<TContract>,
 > = ReturnType<ContractCall<TContract, TMethodName>>;
 
+/**
+ * @type StaticContractReturnType
+ */
 export type StaticContractReturnType<
   TContract extends Contract,
   TMethodName extends ContractMethodName<TContract>,
@@ -75,20 +82,25 @@ export type ContractQueryReturnType<TContract extends Contract> = ReturnType<
 >;
 
 /**
- * Gets a type for the call arguments of a given contract and method name
+ * @type ContractMethodArgs
+ *  @summary Gets a type for the call arguments of a given contract and method name
  */
 export type ContractMethodArgs<
   TContract extends Contract,
   TMethodName extends ContractMethodName<TContract>,
 > = Parameters<ContractFunctionCall<TContract, TMethodName>>;
 
+/**
+ * @type StaticContractMethodArgs
+ */
 export type StaticContractMethodArgs<
   TContract extends Contract,
   TMethodName extends ContractMethodName<TContract>,
 > = Parameters<StaticContractCall<TContract, TMethodName>>;
 
 /**
- * Gets a type for the call arguments of a given contract and method name
+ * @type ContractFilterArgs
+ * @summary  Gets a type for the call arguments of a given contract and method name
  */
 export type ContractFilterArgs<
   TContract extends Contract,

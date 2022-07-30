@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
     "jsx": "react",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -12,9 +9,12 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "sourceMap": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "rootDir": "./src",
@@ -26,6 +26,8 @@
       ],
     },
     "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true },
       {
         "exclude": [
           "*"
@@ -35,6 +37,11 @@
     ]
   },
   "include": [
-    "src"
+    "src/**/*.ts"
   ],
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "src/**/*.test.ts"
+  ]
 }
