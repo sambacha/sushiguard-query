@@ -17,6 +17,7 @@
   "scripts": {
     "compile": "npx rollup -c sdk.rollup.js",
     "clean": "rm -rf dist",
+    "build": "npm run build:source",
     "build:pre": "npm run clean",
     "build:types": "npx tsc",
     "build:source": "npx rollup --config rollup.config.js",
